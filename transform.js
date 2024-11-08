@@ -28,6 +28,10 @@ const applyCustomMappings = (row) => {
     mappedRow["parameter"] = parameterMappings[parameterValue];
   }
 
+  //handle empty values
+  mappedRow["quality"] = 90;
+  mappedRow["dataQualityText"] = "Fair";
+
   return mappedRow;
 };
 
