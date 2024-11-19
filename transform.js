@@ -9,6 +9,8 @@ const config = require("./config.json");
 const outputDirectory = path.resolve(__dirname, config.outputDirectory);
 const propertyMappings = config.propertyMappings || {};
 const parameterMappings = config.parameterMappings || {};
+const programMappings = config.programMappings || {};
+const parameterConversions = config.parameterConversions || {};
 const baseApiUrl = config.baseApiUrl;
 const stationIds = config.stationIds;
 
@@ -18,19 +20,44 @@ const tempZipFilePath = path.resolve(__dirname, "data.zip");
 // Function to apply custom mappings to a data row
 const applyCustomMappings = (row) => {
   const mappedRow = {};
+
+  // Apply property mappings
   for (const [originalKey, newKey] of Object.entries(propertyMappings)) {
     mappedRow[newKey] = row[originalKey];
   }
 
-  // Apply parameter mapping if it exists
+  // Check if the parameter exists in parameterMappings
   const parameterValue = mappedRow["parameter"];
-  if (parameterMappings[parameterValue]) {
-    mappedRow["parameter"] = parameterMappings[parameterValue];
+  if (!parameterMappings[parameterValue]) {
+    return null; // Exclude this row if there's no matching parameter mapping
   }
 
-  //handle empty values
+  // Update the parameter to the mapped value
+  mappedRow["parameter"] = parameterMappings[parameterValue];
+
+  // Check if the program exists in programMappings, if it does, update the program to the mapped value
+  const programValue = mappedRow["program"];
+  if (programMappings[programValue]) {
+    mappedRow["program"] = programMappings[programValue];
+  }
+
+  // Handle empty values
   mappedRow["quality"] = 90;
   mappedRow["dataQualityText"] = "Fair";
+
+  // Loop over parameterConversions to apply unit conversions
+  for (const [parameterKey, conversion] of Object.entries(
+    parameterConversions
+  )) {
+    if (
+      mappedRow["parameter"] === parameterKey &&
+      mappedRow["unit"] === conversion.oldUnit
+    ) {
+      mappedRow["value"] =
+        parseFloat(mappedRow["value"]) * conversion.multiplier;
+      mappedRow["unit"] = conversion.newUnit;
+    }
+  }
 
   return mappedRow;
 };
@@ -99,6 +126,10 @@ const fetchAndProcessDataForStation = async (stationId) => {
           .pipe(csv())
           .on("data", (data) => {
             const mappedData = applyCustomMappings(data);
+
+            // Skip data if it doesn't pass the mapping check
+            if (!mappedData) return;
+
             const parameter = mappedData["parameter"];
 
             // Initialize structure for each parameter if not already created

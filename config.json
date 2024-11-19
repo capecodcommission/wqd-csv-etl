@@ -44,6 +44,21 @@
     "CharacteristicName": "parameter",
     "ResultMeasure/MeasureUnitCode": "unit"
   },
+  "programMappings": {
+    "National Park Service Water Resources Division": "Cape Cod National Seashore Pond Monitoring"
+  },
+  "parameterConversions": {
+    "Total Nitrogen - Reported": {
+      "oldUnit": "umol", 
+      "newUnit": "ug/L", 
+      "multiplier": 14.01
+    },
+    "TP": {
+      "oldUnit": "umol", 
+      "newUnit": "ug/L", 
+      "multiplier": 30.9737
+    }
+  },
   "parameterMappings": {
     "Ammonium": "Ammonium",
     "Nitrate": "Nitrate",
@@ -53,7 +68,6 @@
     "Orthophosphate": "Orthophosphate",
     "Nitrogen": "Total Nitrogen - Reported",
     "Dissolved oxygen saturation": "Dissolved Oxygen Saturation",
-    "pH": "pH Level",
     "Temperature, water": "Water Temperature",
     "Dissolved oxygen (DO)": "Dissolved Oxygen",
     "Conductivity": "Water Conductivity",
