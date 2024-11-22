@@ -48,12 +48,12 @@
     "National Park Service Water Resources Division": "Cape Cod National Seashore Pond Monitoring"
   },
   "parameterConversions": {
-    "Total Nitrogen - Reported": {
+    "Total Nitrogen": {
       "oldUnit": "umol", 
       "newUnit": "ug/L", 
       "multiplier": 14.01
     },
-    "TP": {
+    "Total Phosphorus": {
       "oldUnit": "umol", 
       "newUnit": "ug/L", 
       "multiplier": 30.9737
@@ -62,15 +62,11 @@
   "parameterMappings": {
     "Ammonium": "Ammonium",
     "Nitrate": "Nitrate",
-    "Phosphorus": "TP",
-    "Oxidation reduction potential (ORP)": "Oxidation Reduction Potential",
-    "Specific conductance": "Specific Conductance",
-    "Orthophosphate": "Orthophosphate",
-    "Nitrogen": "Total Nitrogen - Reported",
+    "Phosphorus": "Total Phosphorus",
+    "Nitrogen": "Total Nitrogen",
     "Dissolved oxygen saturation": "Dissolved Oxygen Saturation",
     "Temperature, water": "Water Temperature",
     "Dissolved oxygen (DO)": "Dissolved Oxygen",
-    "Conductivity": "Water Conductivity",
     "Alkalinity, carbonate": "Alkalinity",
     "Chlorophyll a (probe relative fluorescence)": "Chlorophyll-a"
   }
