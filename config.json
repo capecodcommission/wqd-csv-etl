@@ -49,19 +49,17 @@
   },
   "parameterConversions": {
     "Total Nitrogen": {
-      "oldUnit": "umol", 
-      "newUnit": "ug/L", 
-      "multiplier": 14.01
+      "oldUnit": "umol",
+      "newUnit": "mg/L",
+      "multiplier": 0.01401
     },
     "Total Phosphorus": {
-      "oldUnit": "umol", 
-      "newUnit": "ug/L", 
-      "multiplier": 30.9737
+      "oldUnit": "umol",
+      "newUnit": "mg/L",
+      "multiplier": 0.0309737
     }
   },
   "parameterMappings": {
-    "Ammonium": "Ammonium",
-    "Nitrate": "Nitrate",
     "Phosphorus": "Total Phosphorus",
     "Nitrogen": "Total Nitrogen",
     "Dissolved oxygen saturation": "Dissolved Oxygen Saturation",
